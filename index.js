@@ -90,6 +90,6 @@ app.get("/", (req, res) => {
     res.send("hello flora nest")
 })
 
-// app.listen(port, () => {
-//     console.log(`My port is ${port}`)
-// })
+app.listen(port, () => {
+    console.log(`My port is ${port}`)
+})
