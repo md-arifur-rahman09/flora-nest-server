@@ -31,30 +31,53 @@ async function run() {
         await client.connect();
 
         // post trees data to mongoDB
-        app.post('/trees', async (req, res) => {
+        app.post('/plants', async (req, res) => {
             const treeData = req.body;
             const result = await treesCollection.insertOne(treeData);
             res.send(result)
         })
 
         // get trees all data  from mongoDB
-        app.get("/trees", async (req, res) => {
+        app.get("/plants", async (req, res) => {
             const result = await treesCollection.find().toArray();
             res.send(result);
         })
 
         //  get single tree data from mongoDB
-        app.get("/trees/:id", async (req, res) => {
+        app.get("/plants/:id", async (req, res) => {
             const id = req.params.id;
             const query = { _id: new ObjectId(id) };
             const result = await treesCollection.findOne(query);
             res.send(result);
 
+        });
+
+        // PUT ? update data from mongoDB
+        app.put("/plants/:id",async(req,res)=> {
+            const id= req.params.id;
+            const filter= {_id: new ObjectId(id)};
+            const updatedTreeData= req.body;
+            const updatedDoc= {
+                $set: updatedTreeData
+            };
+            const options= {upsert : true};
+            const result= await treesCollection.updateOne(filter,updatedDoc,options);
+            res.send(result);
+
+        })
+
+        // delete data from mongoDB
+        app.delete('/plants/:id', async(req,res)=> {
+            const id=req.params.id;
+            const query={_id : new ObjectId (id)};
+            const result= await treesCollection.deleteOne(query);
+            res.send(result)
         })
 
         // Send a ping to confirm a successful connection
         await client.db("admin").command({ ping: 1 });
         console.log("Pinged your deployment. You successfully connected to MongoDB!");
+        
     } finally {
         // Ensures that the client will close when you finish/error
         // await client.close();
