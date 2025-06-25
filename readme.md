@@ -4,11 +4,27 @@ This is the **backend server** for the Flora Nest project. It handles API reques
 
 ---
 
-## 🌐 Live Server URL
+## 🌐 Live Server Information
 
-🔗 [https://flora-nest-server.vercel.app/](https://flora-nest-server.vercel.app/)
+- 📍 **Base URL**: [https://flora-nest-server.vercel.app](https://flora-nest-server.vercel.app)
+- 🌍 **Deployed on**: Vercel
+- ⚙️ **Backend Framework**: Express.js
+- 🛢️ **Database**: MongoDB Atlas (floraDB > trees collection)
 
----
+### 🔗 Example Endpoints:
+
+| Method | Endpoint            | Description                |
+|--------|---------------------|----------------------------|
+| GET    | `/plants`           | Get all plant data         |
+| GET    | `/plants/:id`       | Get a plant by ID          |
+| POST   | `/plants`           | Insert a new plant         |
+| PUT    | `/plants/:id`       | Update plant information   |
+| DELETE | `/plants/:id`       | Delete a plant             |
+
+> All API endpoints are prefixed by the base URL. Example full URL:  
+> `https://flora-nest-server.vercel.app/plants`
+
+  ----
 
 ## 🛠️ Tech Stack
 
